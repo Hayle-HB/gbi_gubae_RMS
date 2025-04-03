@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import {
   FaHome,
   FaUserPlus,
@@ -11,10 +12,13 @@ import {
 import logo from "../../assets/logo.png";
 
 const NavBar = () => {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [quoteIndex, setQuoteIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const [hasScrolled, setHasScrolled] = useState(false);
+
+  const isActive = (path) => location.pathname === path;
 
   const quotes = [
     {
@@ -96,28 +100,44 @@ const NavBar = () => {
               <div className="ml-10 flex items-baseline space-x-4">
                 <a
                   href="/"
-                  className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-[#5f0113] hover:text-white transition-colors duration-200"
+                  className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                    isActive("/")
+                      ? "bg-[#5f0113]/10 text-[#5f0113]"
+                      : "text-gray-700 hover:bg-[#5f0113]/5 hover:text-[#5f0113]"
+                  }`}
                 >
                   <FaHome className="mr-2" />
                   Home
                 </a>
                 <a
                   href="/register"
-                  className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-[#5f0113] hover:text-white transition-colors duration-200"
+                  className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                    isActive("/register")
+                      ? "bg-[#5f0113]/10 text-[#5f0113]"
+                      : "text-gray-700 hover:bg-[#5f0113]/5 hover:text-[#5f0113]"
+                  }`}
                 >
                   <FaUserPlus className="mr-2" />
                   Register
                 </a>
                 <a
                   href="/registrations"
-                  className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-[#5f0113] hover:text-white transition-colors duration-200"
+                  className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                    isActive("/registrations")
+                      ? "bg-[#5f0113]/10 text-[#5f0113]"
+                      : "text-gray-700 hover:bg-[#5f0113]/5 hover:text-[#5f0113]"
+                  }`}
                 >
                   <FaList className="mr-2" />
                   Registrations
                 </a>
                 <a
                   href="/about"
-                  className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-[#5f0113] hover:text-white transition-colors duration-200"
+                  className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                    isActive("/about")
+                      ? "bg-[#5f0113]/10 text-[#5f0113]"
+                      : "text-gray-700 hover:bg-[#5f0113]/5 hover:text-[#5f0113]"
+                  }`}
                 >
                   <FaInfoCircle className="mr-2" />
                   About
@@ -181,12 +201,16 @@ const NavBar = () => {
             </button>
           </div>
 
-          {/* Drawer content */}
+          {/* Drawer content with active states */}
           <div className="flex-1 overflow-y-auto py-4">
             <nav className="space-y-2 px-2">
               <a
                 href="/"
-                className="flex items-center px-4 py-3.5 text-base font-medium text-gray-700 hover:bg-[#5f0113]/10 hover:text-[#5f0113] rounded-md transition-colors duration-200"
+                className={`flex items-center px-4 py-3.5 text-base font-medium transition-colors duration-200 rounded-md ${
+                  isActive("/")
+                    ? "bg-[#5f0113]/10 text-[#5f0113]"
+                    : "text-gray-700 hover:bg-[#5f0113]/5 hover:text-[#5f0113]"
+                }`}
                 onClick={() => setIsOpen(false)}
               >
                 <FaHome className="mr-3 h-5 w-5" />
@@ -194,7 +218,11 @@ const NavBar = () => {
               </a>
               <a
                 href="/register"
-                className="flex items-center px-4 py-3.5 text-base font-medium text-gray-700 hover:bg-[#5f0113]/10 hover:text-[#5f0113] rounded-md transition-colors duration-200"
+                className={`flex items-center px-4 py-3.5 text-base font-medium transition-colors duration-200 rounded-md ${
+                  isActive("/register")
+                    ? "bg-[#5f0113]/10 text-[#5f0113]"
+                    : "text-gray-700 hover:bg-[#5f0113]/5 hover:text-[#5f0113]"
+                }`}
                 onClick={() => setIsOpen(false)}
               >
                 <FaUserPlus className="mr-3 h-5 w-5" />
@@ -202,7 +230,11 @@ const NavBar = () => {
               </a>
               <a
                 href="/registrations"
-                className="flex items-center px-4 py-3.5 text-base font-medium text-gray-700 hover:bg-[#5f0113]/10 hover:text-[#5f0113] rounded-md transition-colors duration-200"
+                className={`flex items-center px-4 py-3.5 text-base font-medium transition-colors duration-200 rounded-md ${
+                  isActive("/registrations")
+                    ? "bg-[#5f0113]/10 text-[#5f0113]"
+                    : "text-gray-700 hover:bg-[#5f0113]/5 hover:text-[#5f0113]"
+                }`}
                 onClick={() => setIsOpen(false)}
               >
                 <FaList className="mr-3 h-5 w-5" />
@@ -210,7 +242,11 @@ const NavBar = () => {
               </a>
               <a
                 href="/about"
-                className="flex items-center px-4 py-3.5 text-base font-medium text-gray-700 hover:bg-[#5f0113]/10 hover:text-[#5f0113] rounded-md transition-colors duration-200"
+                className={`flex items-center px-4 py-3.5 text-base font-medium transition-colors duration-200 rounded-md ${
+                  isActive("/about")
+                    ? "bg-[#5f0113]/10 text-[#5f0113]"
+                    : "text-gray-700 hover:bg-[#5f0113]/5 hover:text-[#5f0113]"
+                }`}
                 onClick={() => setIsOpen(false)}
               >
                 <FaInfoCircle className="mr-3 h-5 w-5" />
